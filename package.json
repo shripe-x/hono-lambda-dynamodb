@@ -1,0 +1,23 @@
+{
+  "name": "hono-lambda",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild --bundle --outfile=./dist/index.js --platform=node --target=node20 --format=esm  ./src/index.ts",
+    "zip": "zip -j lambda.zip dist/index.js",
+    "update": "aws lambda update-function-code --zip-file fileb://lambda.zip --function-name hello",
+    "deploy": "run-s build zip update",
+    "dev": "npm run sam:build && npm run sam:start",
+    "sam:build": "npm run build && sam build --use-container --build-image public.ecr.aws/sam/build-nodejs20.x",
+    "sam:start": "sam local start-api --host 0.0.0.0 --warm-containers EAGER --container-host host.docker.internal --container-host-interface 0.0.0.0"
+  },
+  "dependencies": {
+    "hono": "^4.6.12"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.130",
+    "@types/node": "^20.10.4",
+    "esbuild": "^0.21.4",
+    "typescript": "^5.3.3"
+  }
+}
