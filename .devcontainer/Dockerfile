@@ -14,6 +14,8 @@ RUN curl -L "https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam
     && ./sam-installation/install \
     && rm -rf aws-sam-cli-linux-x86_64.zip sam-installation
 
+RUN npm install -g aws-cdk
+
 # Dockerを使用するためのグループ設定
 RUN usermod -aG root node
 

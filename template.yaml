@@ -21,4 +21,4 @@ Resources:
     Metadata:
       DockerTag: nodejs20.x-v1
       DockerContext: .
-      Dockerfile: lambda/Dockerfile
+      Dockerfile: Dockerfile
